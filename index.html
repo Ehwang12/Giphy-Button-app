@@ -7,7 +7,8 @@
     
     <!-- Booststrap CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+    <!-- my style file -->
+    <link href="./assets/css/style.css" type="text/css" rel="stylesheet">
     <!-- jquery cdn -->
     <script
     src="https://code.jquery.com/jquery-3.4.1.js"
@@ -20,15 +21,35 @@
     <title>Get Ghibli Gifs!</title>
 </head>
 <body>
-    <header>
+    <!-- <header>
         <h1 class="text-center">Ghibli Gifs</h1>
-    </header>
+    </header> -->
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 text-center buttondiv" id="btnBox">buttons go here</div>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Ghibli GIFs</h1>
+              <p class="lead">Search for your favorite Ghibli movies!</p>
+            </div>
         </div>
+        <!-- button container -->
         <div class="row">
-            <div class="col-12 text-center gifcontainer" id="gifBox">gifs go here</div>
+            <div class="col-12 text-center buttondiv" id="btnBox"></div>
+        </div>
+        <!-- add input here -->
+        <div class="row">
+            <div class="col-2"></div>
+            
+            <div class="col-8 input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">Search your favorites here:</span>
+                </div>
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <!-- gif container -->
+        <div class="row">
+            <div class="col-12 text-center py-3 gifcontainer" id="gifBox">gifs go here</div>
         </div>
     </div>
 

@@ -9,6 +9,8 @@ $(function() {
         "Kiki's Delivery Service"
     ]
 
+    
+    
 
     //function that displays giphy rating
 function giphyINFO() {
@@ -31,18 +33,28 @@ function giphyINFO() {
             var rating = results[i].rating;
             console.log(rating);
 
+            //variable for rating value
             var par = $("<p>").text("Rating: " + rating);
 
+            //creating gif elements and their attributes
+            var stillURL = results[i].images.fixed_height_still.url;
+            var animatedURL = results[i].images.fixed_height.url;
+
             var giphyResult = $("<img>");
-            giphyResult.attr("src", results[i].images.fixed_height_still.url);
+            giphyResult.attr("src", stillURL);
+            giphyResult.attr("class", "gif");
+            giphyResult.attr("data-animate", animatedURL);
+            giphyResult.attr("data-still", stillURL);
+            giphyResult.attr("data-state", "still");
 
             wrapper.prepend(par);
             wrapper.prepend(giphyResult);
-
+            //adding gifs to DOM
             $("#gifBox").prepend(wrapper);
         }
     });
 };
+
 function renderButtons() {
     //empty div to prevent unncessary appending
     $("#btnBox").empty();
@@ -52,8 +64,9 @@ function renderButtons() {
         let movieBtn = $("<button>");
         //create movie class
         movieBtn.addClass("movie btn btn-outline-success mx-2 my-2");
-        //create data attribute
+        //create data attributes
         movieBtn.attr("data-name", ghibliArray[i]);
+
         //add title of movies to buttons
         movieBtn.text(ghibliArray[i]);
         //append to button div
@@ -61,15 +74,35 @@ function renderButtons() {
     }
 }
 
+//click event handler for gif pause/play
+$(document).on("click", ".gif", function() {
+    let dataAnimate = $(this).attr("data-animate");
+    let dataStill = $(this).attr("data-still");
+    var state = $(this).attr("data-state");
+
+    console.log("this is logging dataAnimate: " + dataAnimate);
+    console.log("this is logging dataStill: " + dataStill);
+    console.log("this is logging state: " + state);
+
+    //check variable is equal to still
+    if(state === "still") {
+        //change source using attribute method
+        $(this).attr("src", dataAnimate);
+        //change state
+        $(this).attr("data-state", "animating");
+    } else {
+        //change source back to still url
+        $(this).attr("src", dataStill);
+        //change data state back to still
+        $(this).attr("state", "still");
+        
+    }
+});
+
+//click event handler for generating gifs for movie array
 $(document).on("click", ".movie", giphyINFO);
-    
+
 renderButtons();
-
-
-
-
-
-
 
 
 })
