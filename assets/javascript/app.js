@@ -95,9 +95,19 @@ $(document).on("click", ".gif", function() {
         $(this).attr("src", dataStill);
         //change data state back to still
         $(this).attr("state", "still");
-        
+
     }
 });
+
+$(document).on("click", "#submit", function() {
+    event.preventDefault();
+    //grab input from new search
+    var newGif = $("#newGIF").val().trim();
+    //push new gif into array
+    ghibliArray.push(newGif);
+    //render new button
+    renderButtons();
+})
 
 //click event handler for generating gifs for movie array
 $(document).on("click", ".movie", giphyINFO);
