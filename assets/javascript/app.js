@@ -9,14 +9,11 @@ $(function() {
         "Kiki's Delivery Service"
     ]
 
-    
-    
-
     //function that displays giphy rating
 function giphyINFO() {
     
     var search = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=RcAZt1GF60gWuB2gM73jIyr6CQNmCsz1&q=" + search + "&limit=10&";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=RcAZt1GF60gWuB2gM73jIyr6CQNmCsz1&q=" + search + "&limit=10&offset=10&";
 
     //AJAX call for specific giphy being requested
     $.ajax({
@@ -80,9 +77,9 @@ $(document).on("click", ".gif", function() {
     let dataStill = $(this).attr("data-still");
     var state = $(this).attr("data-state");
 
-    console.log("this is logging dataAnimate: " + dataAnimate);
-    console.log("this is logging dataStill: " + dataStill);
-    console.log("this is logging state: " + state);
+    // console.log("this is logging dataAnimate: " + dataAnimate);
+    // console.log("this is logging dataStill: " + dataStill);
+    // console.log("this is logging state: " + state);
 
     //check variable is equal to still
     if(state === "still") {
@@ -97,6 +94,19 @@ $(document).on("click", ".gif", function() {
         $(this).attr("state", "still");
 
     }
+
+    if(state === "animating") {
+        //change source using attribute method
+        $(this).attr("src", dataStill);
+        //change state
+        $(this).attr("data-state", "still");
+    } else {
+        //change source back to still url
+        $(this).attr("src", dataAnimate);
+        //change data state back to still
+        $(this).attr("state", "animating");
+
+    }
 });
 
 $(document).on("click", "#submit", function() {
@@ -108,6 +118,14 @@ $(document).on("click", "#submit", function() {
     //render new button
     renderButtons();
 })
+
+function showMore() {
+
+}
+
+$(document).on("click", "#showMeMore", function(){
+
+});
 
 //click event handler for generating gifs for movie array
 $(document).on("click", ".movie", giphyINFO);
